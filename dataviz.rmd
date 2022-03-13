@@ -1,7 +1,7 @@
 ---
-title: "Visual data exploration"
+title: "Campaign finance data of candidates"
 author: "Yuan Zhang"
-date: "3/12/2022"
+date: "3/13/2022"
 output: html_document
 ---
 
@@ -23,7 +23,9 @@ candidates <- read.csv("fec_2008-2022.csv")
 
 
 
-### 1.1 Bar plot of top 5 parties
+# Part 1. Visual data exploration
+
+### 1.1 Bar plot of the top 5 parties
 
 ```{r party-barplot, echo = FALSE}
 Top_5_Party_Counts <- candidates %>% 
@@ -41,10 +43,10 @@ ggplot(Top_5_Party_Counts,
   coord_flip()
 ```
 
-Among the top 5 popular parties, the number of candidates affiliated with the Republican Party and Democratic Party significantly outweighs (at least 300%) candidates from other political parties. Republican and Democratic are the dominant parties in the dataset.
+Among the top 5 popular parties, the number of candidates affiliated with the Republican Party and the Democratic Party significantly outweighs (at least 300%) candidates from other political parties. Republican and Democratic are the dominant parties in the data set.
 
 
-### 1.2 Individual contribution density plot
+### 1.2 Density estimates of individual contribution
 
 ```{r individual-contribution-density, echo = FALSE}
 ggplot(candidates, aes(x = asinh(Individual_Contribution))) +
@@ -54,12 +56,12 @@ ggplot(candidates, aes(x = asinh(Individual_Contribution))) +
         axis.title = element_text(size = 15))
 ```
 
-Overall, a high density of candidates made relatively low individual contribution around the mode compared to candidates who made 10 to 15 arcsinh units of individual contribution.
+The density plot shows a bimodal distribution of total contributions from individuals. A high density of candidates made relatively low individual contribution around the mode compared to candidates who made 10 to 15 arcsinh units of individual contribution around the lower density peak.
 
 
-### 1.3 Total loan sina plot
+### 1.3 Sina plot of total loan
 
-```{r echo = FALSE}
+```{r sina-total-loan, echo = FALSE}
 Pop_States <- candidates %>% 
   filter(Cand_Office_St %in% c("CA", "TX", "FL", "NY", "IL") & Total_Loan > 0)
 Reports_2020 <- Pop_States[grepl("2020", Pop_States$Coverage_End_Date, fixed = TRUE),]
@@ -71,12 +73,12 @@ ggplot(Reports_2020 , aes(x = Cand_Office_St, y = log(Total_Loan))) +
   theme_minimal(base_size = 15)
 ```
 
-For reports in 2020, Candidates from popular states tend to have a total loan located between 8 and 13 natural log of dollars, ignoring total loan being zero. There seems to be an outlier in Florida being significantly small.
+For reports in 2020, Candidates from popular states tend to have a total loan located between 5 and 15 natural log of dollars, ignoring total loan being zero. There seems to be an outlier in Florida being significantly small.
 
 
 ### 1.4 Ending years of reports
 
-```{r echo = FALSE}
+```{r timeline-report, echo = FALSE}
 report_end_year <- year(mdy(candidates$Coverage_End_Date))
 report_end_year <- drop_na(data.frame("year" = report_end_year))
 report_end_year <- report_end_year %>% 
@@ -89,38 +91,36 @@ ggplot(report_end_year, aes(x = year, height = counts, y = 0)) +
   labs(x = "year", y = "report counts") +
   theme_minimal() +
   theme(text = element_text(size=15))
-
 ```
 
 The line graph shows the ending year of reports fluctuating between odd years and even years.
 Majority reports ended in even years (e.g., 2010, 2020), and a minor portion of reports ended in odd years (e.g., 2015).
 
 
-### 1.5 Candidate state counts
+### 1.5 Geographical distribution of candidate office
 
-```{r echo = FALSE, warning = FALSE}
+```{r choropleth-candidate-office, echo = FALSE, warning = FALSE}
 # Modified from https://github.com/clauswilke/dataviz/blob/master/geospatial_data.Rmd
 state <- candidates %>% 
-  group_by(Cand_State) %>% 
+  group_by(Cand_Office_St) %>% 
   filter(Cand_State != "VI" && Cand_State != "PR") %>% 
   summarize(counts = n())
 state$counts = cut(state$counts, breaks=c(0, 400, 800, 1200, 1600, 2000, 3000),
                     labels = c("< 400", "400-800", "800-1200", "1200-1600", "1600-2000", "> 2000"))
 
-ggplot(state, aes(state = Cand_State, fill = counts)) +
+ggplot(state, aes(state = Cand_Office_St, fill = counts)) +
   geom_statebins(lbl_size = 4) +
   expand_limits(x = -1.4) +
   scale_fill_discrete_sequential(
     c1 = 20, c2 = 0, cmax = 40, l1 = 30, l2 = 100, h1 = -83, h2 = 20, p1 = 1, p2 = 1.3, rev = TRUE, 
-    name = "candidate state", nmax = 8, order = 2:7,
+    name = "office count", nmax = 8, order = 2:7,
     guide = guide_legend(override.aes = list(size = 7), reverse = TRUE)) +
   theme_void() +
   theme(legend.position = c(0.05, 1),
     legend.justification = c(0, 1.1))
 ```
 
-California and Texas have the darkest color than other states; most candidates have California or Texas as their state of mailing address. Also, many candidates have their state of mail address as Florida or New York.
-
+California has the greatest color depth than other states; most candidates have their offices located in California. Also, many candidates have their offices in Texas, Florida, or New York. But there are less candidate offices in Alaska.
 
 
 \newpage
@@ -128,35 +128,34 @@ California and Texas have the darkest color than other states; most candidates h
 
 # Part 2. Misleading figures
 
+### 2.1 Log transformed ending years of reports
 
-### 2.1 Log transformation can hide fluctuations
-
-```{r echo = FALSE}
+```{r bad-timeline-report, echo = FALSE}
 ggplot(report_end_year, aes(x = year, height = log(counts), y = 0)) +
   geom_ridgeline(color = "#0072B2", fill = "#0072B240", size = 0.5) +
   labs(x = "year", y = bquote(log[e]("report counts"))) +
   theme_minimal() +
   theme(text = element_text(size=15))
-
 ```
 
-At a glance, the number of report ending years has a little variation from year to year. It just varies within 4 to 8 units.
+At a glance, the number of report ending years has a little variation from year to year. It just varies within 4 to 8 units. Although the plot is technically right, the log transformation eases the periodic trend in the visual representation, making fluctuations less obvious.
 
 
-### 2.2 Ugly office postal state counts
+### 2.2 Indistinguishable office distribution
 
-```{r echo = FALSE, warning = FALSE}
-ggplot(state, aes(state = Cand_State, fill = counts)) +
+```{r bad-choropleth-candidate-office2, echo = FALSE, warning = FALSE}
+ggplot(state, aes(state = Cand_Office_St, fill = counts)) +
   geom_statebins(lbl_size = 4) +
   expand_limits(x = -1.4) +
   scale_fill_discrete_sequential(
     c1 = 30, c2 = 0, cmax = 10, l1 = 10, l2 = 50, h1 = 10, h2 = 1, p1 = 1, p2 = 1, rev = TRUE, 
-    name = "candidate state", nmax = 8, order = 2:7,
+    name = "office count", nmax = 8, order = 2:7,
     guide = guide_legend(override.aes = list(size = 7), reverse = TRUE)) +
   theme_void() +
   theme(legend.position = c(0.05, 1),
     legend.justification = c(0, 1.1))
-
 ```
 
-California, Texas, Florida, and New York are the most popular mailing states with > 2000 counts. Their color depth is the greatest.
+People may naturally think California and Texas are the most popular states of candidate offices (> 2000 counts). The dark color depth makes them hard to distinguish from one another. In fact, there are more than 2000 offices only in California, but not in Texas. They are not in the same category.
+
+
