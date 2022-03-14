@@ -10,6 +10,6 @@ A few data representations are created along with corresponding stories. Figures
 
 Not all data representations can convey the story messages clearly. In part 2, two figures in part 1 are transformed, and they tell different stories that may not reflect the truth in the data set. Although these two figures are technically right, their stories can be misleading to many people who don't look at them carefully.
 
-#### The rendered report can be viewed via dataviz.md or [html page](https://yuanzzhang.github.io/cf_dataviz/dataviz.html).
+### The rendered report can be viewed via dataviz.md or [html page](https://yuanzzhang.github.io/cf_dataviz/dataviz.html).
 
 (All figures are created in r with packages)
