@@ -20,7 +20,7 @@ library(statebins)
 library(colorspace)
 
 
-candidates <- read.csv("fec_2008-2020.csv")
+candidates <- read.csv("data/fec_2008-2020.csv")
 ```
 
 
