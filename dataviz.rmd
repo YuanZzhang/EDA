@@ -145,7 +145,7 @@ At a glance, the number of report ending years has little variations from year t
 
 ### 2.2 Dark colored office distribution
 
-```{r bad-choropleth-candidate-office2, echo = FALSE, warning = FALSE}
+```{r bad-choropleth-candidate-office, echo = FALSE, warning = FALSE}
 ggplot(state, aes(state = Cand_Office_St, fill = counts)) +
   geom_statebins(lbl_size = 4) +
   expand_limits(x = -1.4) +

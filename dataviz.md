@@ -86,7 +86,7 @@ distinct.
 
 ### 2.2 Dark colored office distribution
 
-![](dataviz_files/figure-gfm/bad-choropleth-candidate-office2-1.png)<!-- -->
+![](dataviz_files/figure-gfm/bad-choropleth-candidate-office-1.png)<!-- -->
 
 People may naturally think California and Texas are the most popular
 states of candidate offices (&gt; 2000 counts). The dark color depth
