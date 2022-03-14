@@ -2,8 +2,7 @@
 title: "Visual data exploration"
 date: "3/13/2022"
 output:
-  pdf_document: default
-  html_document: default
+  github_document
 ---
 
 
