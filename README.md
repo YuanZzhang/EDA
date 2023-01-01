@@ -10,6 +10,6 @@ In Part 1, several data representations were created along with corresponding st
 
 In part 2 of this project, two figures from part 1 were transformed and presented in a way that conveyed different messages. While these figures were technically accurate, they may have been misleading to some viewers who did not examine them carefully. This exercise demonstrated the importance of carefully considering how data is represented, as not all data representations can clearly convey the intended message. By understanding the potential for figures to be misleading, we can better avoid them in the future.
 
-### The rendered report can be viewed via dataviz.md or [html page](https://yuanzzhang.github.io/cf-dataviz/dataviz.html).
+### The rendered report can be viewed via dataviz.md or [html page](https://yuanzzhang.github.io/cf-dataviz/dataviz).
 
 (All figures are created in R with packages)
