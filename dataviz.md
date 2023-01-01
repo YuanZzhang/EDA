@@ -1,4 +1,4 @@
-Visual data exploration
+Campaign Finance Visualization
 ================
 3/13/2022
 

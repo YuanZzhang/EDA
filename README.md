@@ -1,4 +1,4 @@
-# Visual data exploration
+# Campaign Finance Visualization
 
 This is an **exploration** about candidate's campaign finance data by using several **data visualization** concepts from the book [*Fundamentals of Data visualization*](https://clauswilke.com/dataviz/index.html). The data set has 26828 rows and 50 columns, which is a combination of candidate summary file from year 2008 to 2020 obtained from the U.S. Federal Election Commission ([FEC](https://www.fec.gov/)). Each summary file covers for a two year period of candidate's financial activity summary. For more detailed file description, please visit: <https://www.fec.gov/campaign-finance-data/candidate-summary-file-description/>.
 
