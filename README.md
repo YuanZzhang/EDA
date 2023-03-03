@@ -23,7 +23,7 @@ insights.
 
 ### 1.1 Bar plot of the top 5 parties
 
-![](dataviz_files/figure-gfm/party-barplot-1.png)<!-- -->
+<img src="dataviz_files/figure-gfm/party-barplot-1.png" width="65%" />
 
 Among the top 5 popular parties, the number of candidates affiliated
 with the Republican Party and the Democratic Party significantly
@@ -32,7 +32,7 @@ Republican and Democratic are the dominant parties in the dataset.
 
 ### 1.2 Density estimates of individual contribution
 
-![](dataviz_files/figure-gfm/individual-contribution-density-1.png)<!-- -->
+<img src="dataviz_files/figure-gfm/individual-contribution-density-1.png" width="65%" />
 
 The density plot shows a bimodal distribution of total contributions
 from individuals. A high density of candidates made relatively low
@@ -42,7 +42,7 @@ density peak.
 
 ### 1.3 Sina plot of total loan from 2020 reports
 
-![](dataviz_files/figure-gfm/sina-total-loan-1.png)<!-- -->
+<img src="dataviz_files/figure-gfm/sina-total-loan-1.png" width="65%" />
 
 For reports in 2020, candidates from popular states tend to have a total
 loan located between 5 and 15 natural log of dollars, ignoring total
@@ -51,7 +51,7 @@ away from the cluster, so it can be an outlier.
 
 ### 1.4 Ending years of reports
 
-![](dataviz_files/figure-gfm/timeline-report-1.png)<!-- -->
+<img src="dataviz_files/figure-gfm/timeline-report-1.png" width="65%" />
 
 The line graph shows the ending year of reports fluctuating between odd
 years and even years. Majority reports ended in even years (e.g., 2010,
@@ -59,7 +59,7 @@ years and even years. Majority reports ended in even years (e.g., 2010,
 
 ### 1.5 Geographical distribution of candidate office
 
-![](dataviz_files/figure-gfm/choropleth-candidate-office-1.png)<!-- -->
+<img src="dataviz_files/figure-gfm/choropleth-candidate-office-1.png" width="65%" />
 
 California has the greatest color depth than other states, so most
 candidates have their offices located in California. Also, many
@@ -79,7 +79,7 @@ misleading, we can better avoid them in the future.
 
 ### 2.1 Log transformed ending years of reports
 
-![](dataviz_files/figure-gfm/bad-timeline-report-1.png)<!-- -->
+<img src="dataviz_files/figure-gfm/bad-timeline-report-1.png" width="65%" />
 
 At a glance, the number of report ending years has little variations
 from year to year. It just varies within 4 to 8 units. Although the plot
@@ -90,7 +90,7 @@ distinct.
 
 ### 2.2 Dark colored office distribution
 
-![](dataviz_files/figure-gfm/bad-choropleth-candidate-office-1.png)<!-- -->
+<img src="dataviz_files/figure-gfm/bad-choropleth-candidate-office-1.png" width="65%" />
 
 People may naturally think California and Texas are the most popular
 states of candidate offices (&gt; 2000 counts). The dark color depth
